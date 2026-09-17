@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATV Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Tektur:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060A;
+  --surface:#0F1322;
+  --surface-hover:#181E33;
+  --accent:#00F0AA;
+  --accent-dim:#00C48A;
+  --purple:#7A5AF8;
+  --text:#E8EDF5;
+  --muted:#546178;
+  --border:#1D2333;
+  --radius:12px;
+  --focus:0 0 0 3px #04060A,0 0 0 6px #00F0AA;
+}
+html{font-size:18px;scroll-behavior:smooth}
+@media(max-width:900px){html{font-size:16px}}
+@media(max-width:600px){html{font-size:15px}}
+body{
+  font-family:'Instrument Sans',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+}
+::selection{background:var(--accent);color:var(--bg)}
+
+/* Header */
+header{
+  padding:3rem 1.5rem 0;
+  max-width:1360px;
+  margin:0 auto;
+  width:100%;
+}
+.header-row{
+  display:flex;
+  align-items:baseline;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+h1{
+  font-family:'Tektur',sans-serif;
+  font-weight:800;
+  font-size:clamp(1.6rem,4vw,2.8rem);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--text);
+  line-height:1.1;
+}
+.count{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  font-weight:600;
+  background:var(--accent);
+  color:var(--bg);
+  padding:.15em .55em;
+  border-radius:99px;
+  line-height:1.4;
+  vertical-align:middle;
+}
+.sub{
+  color:var(--muted);
+  font-size:.85rem;
+  margin-top:.15rem;
+  font-family:'JetBrains Mono',monospace;
+}
+.divider{
+  border:none;
+  height:1px;
+  background:var(--border);
+  margin:1.25rem 0 0;
+}
+
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  padding:1.5rem;
+  max-width:1360px;
+  margin:0 auto;
+  width:100%;
+}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+
+/* Card */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  transition:background .2s,border-color .2s,transform .15s;
+  outline:none;
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
+  overflow:hidden;
+}
+.card:focus-visible{
+  box-shadow:var(--focus);
+  border-color:var(--accent);
+}
+.card:hover,.card:focus-visible{
+  background:var(--surface-hover);
+  border-color:var(--accent-dim);
+  transform:translateY(-2px);
+}
+.card-body{padding:1.25rem 1.25rem .85rem;flex:1;display:flex;flex-direction:column}
+
+/* Size badge — the hero element */
+.size-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;
+  font-weight:600;
+  color:var(--accent);
+  letter-spacing:.02em;
+  margin-bottom:.6rem;
+}
+.size-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  flex-shrink:0;
+}
+
+/* Version */
+.version{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;
+  color:var(--purple);
+  margin-bottom:.35rem;
+  letter-spacing:.01em;
+}
+
+/* App name */
+.app-name{
+  font-family:'Tektur',sans-serif;
+  font-weight:700;
+  font-size:1.05rem;
+  letter-spacing:.03em;
+  line-height:1.2;
+  color:var(--text);
+  margin-bottom:.15rem;
+}
+
+/* Download button */
+.download-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  font-family:'Instrument Sans',sans-serif;
+  font-weight:600;
+  font-size:.7rem;
+  color:var(--bg);
+  background:var(--accent);
+  border:none;
+  border-radius:6px;
+  padding:.5rem 1rem;
+  cursor:pointer;
+  text-decoration:none;
+  transition:background .15s,transform .1s;
+  align-self:flex-start;
+  margin-top:.75rem;
+  letter-spacing:.02em;
+}
+.download-btn:hover,.download-btn:focus-visible{
+  background:var(--accent-dim);
+  transform:scale(1.03);
+}
+.download-btn:focus-visible{box-shadow:var(--focus);outline:none}
+.download-btn svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+
+/* Size progress bar at card bottom */
+.size-bar{
+  height:3px;
+  background:var(--border);
+  margin-top:auto;
+}
+.size-bar-fill{
+  height:100%;
+  background:var(--accent);
+  transition:width .6s ease;
+  border-radius:0 2px 2px 0;
+}
+
+/* Empty state */
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  padding:4rem 1.5rem;
+  color:var(--muted);
+}
+
+/* Staggered fade-in */
+.card{opacity:0;transform:translateY(12px)}
+.card.visible{animation:fadeUp .45s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+  .card{opacity:1;transform:none}
+  .size-bar-fill{transition:none}
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:2rem 1.5rem 3rem;
+  color:var(--muted);
+  font-size:.6rem;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <h1>ATV Tools</h1>
+    <span class="count" id="count">0</span>
+  </div>
+  <p class="sub" id="updated"></p>
+  <hr class="divider">
+</header>
+
+<div class="grid" id="grid"></div>
+
+<footer>atv-tools &middot; github pages</footer>
+
+<script>
+(async()=>{
+  const grid=document.getElementById('grid');
+  const countEl=document.getElementById('count');
+  const updatedEl=document.getElementById('updated');
+  const fmtDate=d=>{const m=d.toLocaleDateString('ru-RU',{day:'numeric',month:'short',year:'numeric'});return'Обновлено '+m};
+
+  let data;
+  try{
+    const r=await fetch('index.json?_='+Date.now());
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    data=await r.json();
+  }catch(e){
+    grid.innerHTML='<div class="empty"><p>Не удалось загрузить список приложений</p></div>';
+    return;
+  }
+
+  countEl.textContent=data.total;
+  updatedEl.textContent=data.apps.length?fmtDate(new Date(data.updated)):'';
+
+  if(!data.apps.length){
+    grid.innerHTML='<div class="empty"><p>APK-файлы не найдены.<br>Добавьте файлы в папку apk/ и запустите сборку.</p></div>';
+    return;
+  }
+
+  const maxSize=data.maxSizeBytes||1;
+
+  data.apps.forEach((app,i)=>{
+    const card=document.createElement('a');
+    card.href=app.url;
+    card.className='card';
+    card.setAttribute('download','');
+    card.setAttribute('target','_blank');
+    card.style.animationDelay=(i*0.06)+'s';
+
+    const pct=Math.round((app.sizeBytes/maxSize)*100);
+
+    card.innerHTML=
+      '<div class="card-body">'+
+        '<div class="size-badge">'+
+          '<span class="size-dot"></span>'+
+          app.size+
+        '</div>'+
+        (app.version?'<div class="version">v'+app.version+'</div>':'')+
+        '<div class="app-name">'+app.name+'</div>'+
+        '<span class="download-btn">'+
+          '<svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h3.66V9h3.84L12 2z"/></svg>'+
+          'Скачать'+
+        '</span>'+
+      '</div>'+
+      '<div class="size-bar"><div class="size-bar-fill" style="width:'+pct+'%"></div></div>';
+
+    grid.appendChild(card);
+
+    requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('visible')));
+  });
+})();
+</script>
+
+</body>
+</html>
