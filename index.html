@@ -134,12 +134,14 @@ h1{
   letter-spacing:.02em;
   margin-bottom:.6rem;
 }
+.size-badge--ext{color:var(--purple)}
 .size-dot{
   width:6px;height:6px;
   border-radius:50%;
   background:var(--accent);
   flex-shrink:0;
 }
+.size-dot--ext{background:var(--purple)}
 
 /* Version */
 .version{
@@ -276,26 +278,34 @@ footer{
     const card=document.createElement('a');
     card.href=app.url;
     card.className='card';
-    card.setAttribute('download','');
     card.setAttribute('target','_blank');
     card.style.animationDelay=(i*0.06)+'s';
 
-    const pct=Math.round((app.sizeBytes/maxSize)*100);
+    const isExt=app.external;
+    if(!isExt)card.setAttribute('download','');
+    else card.setAttribute('rel','noopener noreferrer');
+
+    const pct=isExt?0:Math.round((app.sizeBytes/maxSize)*100);
+    const btnLabel=isExt?'Открыть сайт':'Скачать';
+    const badgeCls='size-badge'+(isExt?' size-badge--ext':'');
+    const dotCls='size-dot'+(isExt?' size-dot--ext':'');
 
     card.innerHTML=
       '<div class="card-body">'+
-        '<div class="size-badge">'+
-          '<span class="size-dot"></span>'+
+        '<div class="'+badgeCls+'">'+
+          '<span class="'+dotCls+'"></span>'+
           app.size+
         '</div>'+
         (app.version?'<div class="version">v'+app.version+'</div>':'')+
         '<div class="app-name">'+app.name+'</div>'+
         '<span class="download-btn">'+
-          '<svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h3.66V9h3.84L12 2z"/></svg>'+
-          'Скачать'+
+          (isExt
+            ?'<svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>'
+            :'<svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h3.66V9h3.84L12 2z"/></svg>')+
+          btnLabel+
         '</span>'+
       '</div>'+
-      '<div class="size-bar"><div class="size-bar-fill" style="width:'+pct+'%"></div></div>';
+      (isExt?'':'<div class="size-bar"><div class="size-bar-fill" style="width:'+pct+'%"></div></div>');
 
     grid.appendChild(card);
 

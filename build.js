@@ -4,6 +4,10 @@ const path = require('path');
 const APK_DIR = path.join(__dirname, 'apk');
 const OUTPUT = path.join(__dirname, 'index.json');
 
+const EXTERNAL_LINKS = {
+  'Seena-1.7.3.apk': 'https://www.seena.su/',
+};
+
 const NOISE = /\b(?:release|general|client|beta|alpha|rc|debug|nightly|stable|final|prod)\b/gi;
 
 const OVERRIDES = {
@@ -85,14 +89,23 @@ function formatSize(bytes) {
 function buildIndex() {
   const files = fs.readdirSync(APK_DIR).filter(f => f.toLowerCase().endsWith('.apk')).sort();
   const apps = files.map(file => {
-    const st = fs.statSync(path.join(APK_DIR, file));
+    const extUrl = EXTERNAL_LINKS[file] || null;
+    const st = extUrl ? null : fs.statSync(path.join(APK_DIR, file));
     const p = parseApkName(file);
-    return { file, name: p.name, version: p.version, sizeBytes: st.size, size: formatSize(st.size), modified: st.mtime.toISOString(), url: 'apk/' + encodeURIComponent(file) };
+    return {
+      file, name: p.name, version: p.version,
+      sizeBytes: extUrl ? 0 : st.size,
+      size: extUrl ? 'внешний' : formatSize(st.size),
+      modified: extUrl ? '' : st.mtime.toISOString(),
+      url: extUrl || ('apk/' + encodeURIComponent(file)),
+      external: !!extUrl,
+    };
   });
-  const idx = { total: apps.length, updated: new Date().toISOString(), maxSizeBytes: Math.max(...apps.map(a => a.sizeBytes), 1), apps };
+  const maxSize = Math.max(...apps.filter(a => !a.external).map(a => a.sizeBytes), 1);
+  const idx = { total: apps.length, updated: new Date().toISOString(), maxSizeBytes: maxSize, apps };
   fs.writeFileSync(OUTPUT, JSON.stringify(idx, null, 2));
   console.log('✓ index.json — ' + apps.length + ' apps');
-  apps.forEach(a => console.log('  ' + a.size.padEnd(8) + ' ' + (a.version ? 'v' + a.version : '').padEnd(14) + ' ' + a.name));
+  apps.forEach(a => console.log('  ' + a.size.padEnd(8) + ' ' + (a.version ? 'v' + a.version : '').padEnd(14) + ' ' + a.name + (a.external ? ' [link]' : '')));
 }
 
 buildIndex();

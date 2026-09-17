@@ -1,7 +1,7 @@
 {
   "total": 10,
-  "updated": "2026-09-17T19:44:01.305Z",
-  "maxSizeBytes": 135506142,
+  "updated": "2026-09-17T19:46:35.646Z",
+  "maxSizeBytes": 65580525,
   "apps": [
     {
       "file": "Happ.apk",
@@ -10,7 +10,8 @@
       "sizeBytes": 65580525,
       "size": "62.5 MB",
       "modified": "2026-09-17T18:49:12.146Z",
-      "url": "apk/Happ.apk"
+      "url": "apk/Happ.apk",
+      "external": false
     },
     {
       "file": "KinoTrend-2.3.8.apk",
@@ -19,7 +20,8 @@
       "sizeBytes": 3944263,
       "size": "3.8 MB",
       "modified": "2026-09-17T18:54:07.181Z",
-      "url": "apk/KinoTrend-2.3.8.apk"
+      "url": "apk/KinoTrend-2.3.8.apk",
+      "external": false
     },
     {
       "file": "LazyMediaDeluxe_ver3.466.apk",
@@ -28,7 +30,8 @@
       "sizeBytes": 11149084,
       "size": "10.6 MB",
       "modified": "2026-09-17T18:54:07.189Z",
-      "url": "apk/LazyMediaDeluxe_ver3.466.apk"
+      "url": "apk/LazyMediaDeluxe_ver3.466.apk",
+      "external": false
     },
     {
       "file": "RuStore-tv-1.110.0.6.apk",
@@ -37,7 +40,8 @@
       "sizeBytes": 23308904,
       "size": "22.2 MB",
       "modified": "2026-09-17T19:02:57.243Z",
-      "url": "apk/RuStore-tv-1.110.0.6.apk"
+      "url": "apk/RuStore-tv-1.110.0.6.apk",
+      "external": false
     },
     {
       "file": "RutubeTv.release.31.16.0.TV-general.411600002.apk",
@@ -46,16 +50,18 @@
       "sizeBytes": 25165150,
       "size": "24.0 MB",
       "modified": "2026-09-17T18:55:48.814Z",
-      "url": "apk/RutubeTv.release.31.16.0.TV-general.411600002.apk"
+      "url": "apk/RutubeTv.release.31.16.0.TV-general.411600002.apk",
+      "external": false
     },
     {
       "file": "Seena-1.7.3.apk",
       "name": "Seena",
       "version": "1.7.3",
-      "sizeBytes": 135506142,
-      "size": "129 MB",
-      "modified": "2026-09-17T18:49:22.956Z",
-      "url": "apk/Seena-1.7.3.apk"
+      "sizeBytes": 0,
+      "size": "внешний",
+      "modified": "",
+      "url": "https://www.seena.su/",
+      "external": true
     },
     {
       "file": "TorrServe_MatriX.142.Client-release.apk",
@@ -64,7 +70,8 @@
       "sizeBytes": 11898409,
       "size": "11.3 MB",
       "modified": "2026-09-17T18:54:07.175Z",
-      "url": "apk/TorrServe_MatriX.142.Client-release.apk"
+      "url": "apk/TorrServe_MatriX.142.Client-release.apk",
+      "external": false
     },
     {
       "file": "VK_Video_(AndroidTV)_(RS)_v.2.115(67691)(9.0-16.0)(arm7a,arm64-8a).apk",
@@ -73,7 +80,8 @@
       "sizeBytes": 63855092,
       "size": "60.9 MB",
       "modified": "2026-09-17T18:56:34.403Z",
-      "url": "apk/VK_Video_(AndroidTV)_(RS)_v.2.115(67691)(9.0-16.0)(arm7a%2Carm64-8a).apk"
+      "url": "apk/VK_Video_(AndroidTV)_(RS)_v.2.115(67691)(9.0-16.0)(arm7a%2Carm64-8a).apk",
+      "external": false
     },
     {
       "file": "Vimu.Media.Player.12.50.apk",
@@ -82,7 +90,8 @@
       "sizeBytes": 62618096,
       "size": "59.7 MB",
       "modified": "2026-09-17T18:58:09.720Z",
-      "url": "apk/Vimu.Media.Player.12.50.apk"
+      "url": "apk/Vimu.Media.Player.12.50.apk",
+      "external": false
     },
     {
       "file": "kion_atv.apk",
@@ -91,7 +100,8 @@
       "sizeBytes": 46899106,
       "size": "44.7 MB",
       "modified": "2026-09-17T18:49:30.866Z",
-      "url": "apk/kion_atv.apk"
+      "url": "apk/kion_atv.apk",
+      "external": false
     }
   ]
 }
